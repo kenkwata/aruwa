@@ -1,2 +1,2 @@
 # aruwa
-Repo for aruwa.co.uk
+Landing page for aruwa.co.uk
