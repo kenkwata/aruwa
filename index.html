@@ -49,6 +49,13 @@
       flex-direction: column;
       gap: 1em;
       margin-bottom: 7em;
+      opacity: 0;
+      animation: fadeInButtons 3s ease 1.5s forwards;
+    }
+
+    @keyframes fadeInButtons {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     a.button {
@@ -59,12 +66,25 @@
       border-radius: 30px;
       border: 1px solid rgba(0, 0, 0, 0.1);
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-      transition: all 0.3s ease;
+      transition: all 0.3s ease, transform 0.2s ease;
       font-weight: 500;
+      position: relative;
+      z-index: 1;
     }
+
     a.button:hover {
       background-color: white;
       border-color: rgba(0, 0, 0, 0.2);
+      transform: translateY(-3px);
+      z-index: 2;
+    }
+
+    /* Dim everything except hovered button using class on body */
+    body.dimmed main,
+    body.dimmed footer,
+    body.dimmed a.button:not(.hovered) {
+      opacity: 0.5 !important;
+      transition: opacity 0.4s ease; /* gradual fade for hover in/out */
     }
 
     footer {
@@ -73,16 +93,20 @@
       font-size: 0.9em;
       color: rgba(0, 0, 0, 0.6);
       text-align: center;
+      transition: opacity 0.3s ease;
     }
+
     footer a {
       color: rgba(0, 0, 0, 0.6);
       text-decoration: none;
       transition: color 0.3s ease;
     }
+
     footer a:hover {
       color: #f6a54a;
       text-decoration: underline;
     }
+
     footer p.quote {
       margin-top: 0.3em;
       font-style: italic;
@@ -95,16 +119,31 @@
     <h1>Kenny Aruwa</h1>
     <p class="tagline">Counsellor, Coach & Consultant</p>
     <p class="tagline italic">Curious about people and minds; passionate about how we make sense of ourselves and what we do with that knowledge.</p>
-    <div class="button-container">
-      <a href="https://theselfspace.com/therapists/kenneth-aruwa/" target="_blank" class="button">Connect with me at Self Space</a>
-      <a href="https://www.linkedin.com/in/kenny-aruwa-9211b133/" target="_blank" class="button">Find me on LinkedIn</a>
-    </div>
   </main>
+  <div class="button-container">
+    <a href="https://theselfspace.com/therapists/kenneth-aruwa/" target="_blank" class="button">Connect with me at Self Space</a>
+    <a href="https://www.linkedin.com/in/kenny-aruwa-9211b133/" target="_blank" class="button">Find me on LinkedIn</a>
+  </div>
   <footer>
     <div>&copy; 2025 Kenny Aruwa</div>
     <div><a href="mailto:kenny@aruwa.co.uk">Contact: kenny@aruwa.co.uk</a></div>
     <p class="quote">If you're reading this, I suggest you make yourself a cup of tea, and then sit and sip it while looking out the window.</p>
   </footer>
+
+  <script>
+    const buttons = document.querySelectorAll('a.button');
+    const body = document.body;
+
+    buttons.forEach(btn => {
+      btn.addEventListener('mouseenter', () => {
+        body.classList.add('dimmed');
+        btn.classList.add('hovered');
+      });
+      btn.addEventListener('mouseleave', () => {
+        body.classList.remove('dimmed');
+        btn.classList.remove('hovered');
+      });
+    });
+  </script>
 </body>
 </html>
-
