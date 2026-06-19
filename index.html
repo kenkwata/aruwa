@@ -112,6 +112,45 @@
       font-style: italic;
       color: rgba(0, 0, 0, 0.6);
     }
+
+    .profile-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+  margin-top: 1em;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    max-height 0.6s ease,
+    opacity 0.6s ease;
+}
+
+.profile-links.show {
+  max-height: 400px;
+  opacity: 1;
+}
+
+.profile-button {
+  font-size: 0.95em;
+  padding: 0.7em 1.8em;
+}
+
+.profile-links .button:nth-child(1) {
+  transition-delay: 0.05s;
+}
+
+.profile-links .button:nth-child(2) {
+  transition-delay: 0.1s;
+}
+
+.profile-links .button:nth-child(3) {
+  transition-delay: 0.15s;
+}
+
+.profile-links .button:nth-child(4) {
+  transition-delay: 0.2s;
+}
   </style>
 </head>
 <body>
@@ -120,10 +159,52 @@
     <p class="tagline">Counsellor, Coach & Consultant</p>
     <p class="tagline italic">Curious about people and minds; passionate about how we make sense of ourselves and what we do with that knowledge.</p>
   </main>
-  <div class="button-container">
-    <a href="https://theselfspace.com/therapists/kenneth-aruwa/" target="_blank" class="button">Connect with me at Self Space</a>
-    <a href="https://www.linkedin.com/in/kenny-aruwa-9211b133/" target="_blank" class="button">Find me on LinkedIn</a>
+<div class="button-container">
+
+  <a href="#" id="profiles-toggle" class="button">
+    Therapist Profiles ▼
+  </a>
+
+  <div id="profile-links" class="profile-links">
+
+    <a
+      href="https://www.psychologytoday.com/gb/counselling/kenny-aruwa-london/1763872"
+      target="_blank"
+      class="button profile-button">
+      Psychology Today
+    </a>
+
+    <a
+      href="https://www.bacp.co.uk/therapists/376110/"
+      target="_blank"
+      class="button profile-button">
+      BACP
+    </a>
+
+    <a
+      href="https://www.baatn.org.uk/find-a-psych-therapist/#!biz/id/6a19accf63f256ee49090ae4"
+      target="_blank"
+      class="button profile-button">
+      BAATN
+    </a>
+
+    <a
+      href="https://theselfspace.com/therapists/kenneth-aruwa/"
+      target="_blank"
+      class="button profile-button">
+      Self Space
+    </a>
+
   </div>
+
+  <a
+    href="https://www.linkedin.com/in/kenny-aruwa-9211b133/"
+    target="_blank"
+    class="button">
+    Find me on LinkedIn
+  </a>
+
+</div>
   <footer>
     <div>&copy; 2025 Kenny Aruwa</div>
     <div><a href="mailto:kenny@aruwa.co.uk">Contact: kenny@aruwa.co.uk</a></div>
@@ -145,5 +226,21 @@
       });
     });
   </script>
+  <script>
+  const profileToggle = document.getElementById('profiles-toggle');
+  const profileLinks = document.getElementById('profile-links');
+
+  profileToggle.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    profileLinks.classList.toggle('show');
+
+    if (profileLinks.classList.contains('show')) {
+      profileToggle.textContent = 'Therapist Profiles ▲';
+    } else {
+      profileToggle.textContent = 'Therapist Profiles ▼';
+    }
+  });
+</script>
 </body>
 </html>
